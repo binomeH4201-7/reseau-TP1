@@ -35,7 +35,6 @@ public class EchoMultiCastDisplay extends Thread {
           multiCastSocket.receive(recv);
           String msg = new String(recv.getData(), 0, recv.getLength()); 
           System.out.println("Response: " + msg);
-
         } catch (Exception e) {break;}
       }
     }

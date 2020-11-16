@@ -74,15 +74,6 @@ public class EchoMultiCast  {
         }
       }
             
-      /*
-    	try {
-    		System.out.println("Server ready..."); 
-    		while (true) {
-    		}
-      } catch (Exception e) {
-          System.err.println("Error in EchoServer:" + e);
-      }
-      */
       try{
         multiCastSocket.leaveGroup(groupAddress);
       }catch (IOException e){
