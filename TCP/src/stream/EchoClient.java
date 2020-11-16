@@ -1,8 +1,8 @@
-/***
- * EchoClient
- * Example of a TCP client 
- * Date: 10/01/04
- * Authors:
+/*
+ EchoClient
+ Example of a TCP client
+ Date: 10/01/04
+ Authors: BUONOMO Phanie - BATEL Arthur
  */
 
 import java.io.*;
@@ -21,7 +21,7 @@ public class EchoClient {
         Socket echoSocket = null;
         PrintStream socOut = null;
         BufferedReader stdIn = null;
-        EchoClientDisplay clientDisplay = null;
+        EchoClientDisplay clientDisplay;
 
         if (args.length != 2) {
           System.out.println("Usage: java EchoClient <EchoServer host> <EchoServer port>");
@@ -30,11 +30,11 @@ public class EchoClient {
 
         try {
       	    // creation socket ==> connexion
-      	    echoSocket = new Socket(args[0],new Integer(args[1]).intValue()); 
+      	    echoSocket = new Socket(args[0], Integer.parseInt(args[1]));
 
             //thread d'affichage des retours
-      	    EchoClientDisplay echoClientDisplay = new EchoClientDisplay(echoSocket);
-      	    echoClientDisplay.start();
+            clientDisplay = new EchoClientDisplay(echoSocket);
+            clientDisplay.start();
 
             //Canaux de récupréation des messages et d'envoi
     		    socOut= new PrintStream(echoSocket.getOutputStream());
