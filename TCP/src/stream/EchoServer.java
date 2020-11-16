@@ -1,8 +1,8 @@
-/***
- * EchoServer
- * Example of a TCP server
- * Date: 10/01/04
- * Authors:
+/*
+ EchoServer
+ Example of a TCP server
+ Date: 10/01/04
+ Authors:
  */
 
 import java.io.*;
@@ -16,7 +16,7 @@ public class EchoServer  {
   	**/
 	static void doService(Socket clientSocket) {
     	  try {
-    		BufferedReader socIn = null;
+    		BufferedReader socIn;
     		socIn = new BufferedReader(
     			new InputStreamReader(clientSocket.getInputStream()));    
     		PrintStream socOut = new PrintStream(clientSocket.getOutputStream());
@@ -31,10 +31,9 @@ public class EchoServer  {
   
  	/**
   	* main method
-	* @param EchoServer port
-  	* 
+	 *
   	**/
-       public static void main(String args[]){ 
+       public static void main(String[] args){
         ServerSocket listenSocket;
         
   	if (args.length != 1) {

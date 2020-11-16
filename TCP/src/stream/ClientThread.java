@@ -1,20 +1,21 @@
-/***
- * ClientThread
- * Example of a TCP server
- * Date: 14/12/08
- * Authors:
+/*
+ ClientThread
+ Example of a TCP server
+ Date: 14/12/08
+ Authors:
  */
 
 
-import java.io.*;
-import java.net.*;
-import java.io.InputStream;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.PrintStream;
+import java.net.Socket;
 
 public class ClientThread
 	extends Thread {
 	
 	private Socket clientSocket;
-  private PrintStream socOut;
+  	private PrintStream socOut;
 	
 	ClientThread(Socket s) {
 		this.clientSocket = s;
@@ -22,11 +23,10 @@ public class ClientThread
 
  	/**
   	* receives a request from client then sends an echo to the client
-  	* @param clientSocket the client socket
-  	**/
+	 **/
 	public void run() {
     	  try {
-    		BufferedReader socIn = null;
+    		BufferedReader socIn;
     		socIn = new BufferedReader(
     			new InputStreamReader(clientSocket.getInputStream()));    
     		socOut = new PrintStream(clientSocket.getOutputStream());
@@ -38,9 +38,9 @@ public class ClientThread
           	System.err.println("Error in EchoServer:" + e); 
             EchoServerMultiThreaded.removeConnectedThread(this);
         }
-  }
+  	}
 
-  public void sendMessageToClient(String msg){
+	public void sendMessageToClient(String msg){
     socOut.println(msg);
   }
   

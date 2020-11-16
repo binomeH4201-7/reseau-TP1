@@ -1,15 +1,15 @@
-/***
- * EchoServer
- * Example of a TCP server
- * Date: 10/01/04
- * Authors:
+/*
+ EchoServer
+ Example of a TCP server
+ Date: 10/01/04
+ Authors:
  */
 
 
-import java.io.*;
-import java.net.*;
-import java.util.List;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.ArrayList;
+import java.util.List;
 
 public class EchoServerMultiThreaded  {
   
@@ -19,9 +19,9 @@ public class EchoServerMultiThreaded  {
   	* 
   	**/
 
-    private static List<ClientThread> connectedThreadList = new ArrayList<ClientThread>();
+    private static List<ClientThread> connectedThreadList = new ArrayList<>();
 
-    public static void main(String args[]){ 
+    public static void main(String[] args){
       ServerSocket listenSocket;
             
     	if (args.length != 1) {
