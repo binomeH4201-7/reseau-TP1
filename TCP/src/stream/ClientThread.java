@@ -2,7 +2,7 @@
  ClientThread
  Example of a TCP server
  Date: 14/12/08
- Authors:
+ Authors: BUONOMO Phanie - BATEL Arthur
  */
 
 

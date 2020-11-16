@@ -2,7 +2,7 @@
  EchoClient
  Example of a TCP client
  Date: 10/01/04
- Authors:
+ Authors: BUONOMO Phanie - BATEL Arthur
  */
 
 import java.io.*;

@@ -2,7 +2,7 @@
  EchoServer
  Example of a TCP server
  Date: 10/01/04
- Authors:
+ Authors: BUONOMO Phanie - BATEL Arthur
  */
 
 
