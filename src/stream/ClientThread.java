@@ -42,7 +42,6 @@ public class ClientThread
 
   public void sendMessageToClient(String msg){
     socOut.println(msg);
-    System.out.println("sendMessageToClient : "+msg);
   }
   
 }

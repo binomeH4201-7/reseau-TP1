@@ -54,7 +54,6 @@ public class EchoServerMultiThreaded  {
     public static void publishMessage(String msg){
       for(ClientThread ct : connectedThreadList){
         ct.sendMessageToClient(msg);
-        System.out.println("Publish Message : "+msg);
       }
     }
 }
