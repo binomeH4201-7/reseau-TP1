@@ -1,0 +1,22 @@
+Class Chat room :
+    - gère les fichiers d'historique
+    - gère les utilisateurs connectés
+
+class server :
+    - public method publishMessage(String msg, enum chatRoom) : appelée par Client thread
+    - private method saveMessage(String msg, enum chatRoom) appelée par publishMessage()
+    - public method joinChatRoom(enum chatRoom) renvoi l'historique des messages
+    - public method createChatRoom(String name)
+    - public method leaveChatRoom(String name)
+
+class ClientThread :
+    - Analyse les messages en provenance du client et appelle les methodes nécessaires du server
+    - appelle publishMessage()
+    - appelle joinChatRoom()
+    - appelle createChatRoom()
+    - appelle leaveChatRoom()
+
+Contenu d'un message :
+    - pseudonyme
+    - date
+    - contenu
