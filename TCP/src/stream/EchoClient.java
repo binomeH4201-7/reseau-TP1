@@ -17,11 +17,11 @@ public class EchoClient {
   *  accepts a connection, receives a message from client then sends an echo to the client
   **/
     public static void main(String[] args) throws IOException {
+        GraphicalInterface g = new GraphicalInterface("TCP chat");
 
         Socket echoSocket = null;
         PrintStream socOut = null;
         BufferedReader stdIn = null;
-        EchoClientDisplay clientDisplay;
 
         if (args.length != 2) {
           System.out.println("Usage: java EchoClient <EchoServer host> <EchoServer port>");
@@ -33,8 +33,6 @@ public class EchoClient {
       	    echoSocket = new Socket(args[0], Integer.parseInt(args[1]));
 
             //thread d'affichage des retours
-            clientDisplay = new EchoClientDisplay(echoSocket);
-            clientDisplay.start();
 
             //Canaux de récupréation des messages et d'envoi
     		    socOut= new PrintStream(echoSocket.getOutputStream());
@@ -52,6 +50,7 @@ public class EchoClient {
         while (true) {
         	line = stdIn.readLine();
         	if (line.equals(".")) break;
+        	g.publishMessage(line);
         	socOut.println(line);
         }
       socOut.close();
