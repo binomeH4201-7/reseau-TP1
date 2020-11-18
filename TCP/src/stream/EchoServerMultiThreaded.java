@@ -1,5 +1,5 @@
 /*
-   EchoServer
+   EchoServerMultiThreaded
    Example of a TCP server
 Date: 10/01/04
 Authors: BUONOMO Phanie - BATEL Arthur
@@ -15,7 +15,7 @@ public class EchoServerMultiThreaded  {
 
   /**
    * main method
-   * @param EchoServer port
+   * @param EchoServerMultiThreaded port
    * 
    **/
 
@@ -26,7 +26,7 @@ public class EchoServerMultiThreaded  {
     ServerSocket listenSocket;
 
     if (args.length != 1) {
-      System.out.println("Usage: java EchoServer <EchoServer port>");
+      System.out.println("Usage: java EchoServerMultiThreaded <EchoServerMultiThreaded port>");
       System.exit(1);
     }
     try {
@@ -40,7 +40,7 @@ public class EchoServerMultiThreaded  {
         ct.start();
       }
     } catch (Exception e) {
-      System.err.println("Error in EchoServer:" + e);
+      System.err.println("Error in EchoServerMultiThreaded:" + e);
     }
   }
 
