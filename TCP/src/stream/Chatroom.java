@@ -7,19 +7,10 @@ public class Chatroom {
 
   private List<ClientThread> connectedClientsList;
   private String name;
-  private BufferedWriter outFile;
 
   public Chatroom(String name){
     this.name = name;
     this.connectedClientsList = new LinkedList<ClientThread>();
-    try
-    {
-      this.outFile = new BufferedWriter(new FileWriter("./history/"+name+".save"));
-    }
-    catch(IOException exc)
-    {
-      System.out.println("Could not find the history file for chatroom "+this.name );
-    }
   }
 
   public void join(ClientThread ct){
@@ -31,8 +22,19 @@ public class Chatroom {
   }
 
   public void addMessageToHistory(String message){
+    BufferedWriter outFile = null;
+    try
+    {
+      outFile = new BufferedWriter(new FileWriter("./history/"+name+".save",true));
+    }
+    catch(IOException exc)
+    {
+      System.out.println("Could not find the history file for chatroom "+this.name );
+    }
     try{
-      this.outFile.write(message,0,message.length());
+      outFile.append(message+"\n");
+      outFile.close();
+
     }
     catch(IOException e)
     {
@@ -51,14 +53,13 @@ public class Chatroom {
     }
     catch(FileNotFoundException exc)
     {
-      System.out.println("Could not find the history file for chatroom "+this.name );
+      System.out.println("Could not find the history file for chatroom "+this.name);
     }
 
     try{
 
       while ((line = inFile.readLine()) != null)
         history.add(line);
-
       inFile.close();
     }
     catch(IOException e)
@@ -74,16 +75,6 @@ public class Chatroom {
 
   public String getName(){
     return this.name;
-  }
-
-  public void closeHistory(){
-    try{
-      this.outFile.close();
-    }
-    catch(IOException e)
-    {
-      System.out.println("Error while writing the history");
-    }
   }
 
 }
