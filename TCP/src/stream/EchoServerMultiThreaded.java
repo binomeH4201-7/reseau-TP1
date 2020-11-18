@@ -44,7 +44,7 @@ public class EchoServerMultiThreaded  {
     }
   }
 
-  public void createChatroom(String chatName){
+  public static void createChatroom(String chatName){
     Chatroom chat = new Chatroom(chatName);
     chatroomList.add(chat);
   }
@@ -53,12 +53,14 @@ public class EchoServerMultiThreaded  {
     connectedThreadList.add(ct);
   }
 
-  public static void joinChatroom(ClientThread ct, String nameChat){
+  public static Chatroom joinChatroom(ClientThread ct, String nameChat){
     for(Chatroom chat : chatroomList){
-      if(chat.getName().equals(nameChat))
+      if(chat.getName().equals(nameChat)){
         chat.join(ct);
-      break;
+        return chat;
+      }
     }
+    return null;
   }
 
   public static void removeConnectedThread(ClientThread ct){

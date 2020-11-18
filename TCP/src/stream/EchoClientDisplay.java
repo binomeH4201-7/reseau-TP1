@@ -1,8 +1,8 @@
-/*
- EchoClient
- Example of a TCP client
- Date: 10/01/04
- Authors: BUONOMO Phanie - BATEL Arthur
+/***
+ * EchoClient
+ * Example of a TCP client 
+ * Date: 10/01/04
+ * Authors:
  */
 
 import java.io.*;
