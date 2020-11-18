@@ -34,8 +34,6 @@ extends Thread {
       socOut = new PrintStream(clientSocket.getOutputStream());
       while (true) {
         String line = socIn.readLine();
-        //récuperer le tag du message : JOIN LEAVE CREATE POST
-        //token delimiteur : $
         String[] sublines = line.split("\\$",4);
         String tag = sublines[0];
         String date = sublines[1];
@@ -52,23 +50,18 @@ extends Thread {
         if(currentChat != null){
           switch(tag){
             case "LEAVE":
-              EchoServerMultiThreaded.leaveChatroom(this,currentChat);
-              EchoServerMultiThreaded.publishMessage(msg+"has left.",currentChat);
-              currentChat = null;
+              this.leave(msg);
               break;
             case "CREATE":
-              EchoServerMultiThreaded.createChatroom(chatroom_or_post);
-              EchoServerMultiThreaded.leaveChatroom(this,currentChat);
-              currentChat = EchoServerMultiThreaded.joinChatroom(this,chatroom_or_post);
-              EchoServerMultiThreaded.publishMessage(msg+ "has created the chatroom "+chatroom_or_post,currentChat);
+              this.leave(msg);
+              this.create(msg,chatroom_or_post);
               break;
             case "POST":
-              EchoServerMultiThreaded.publishMessage(msg+chatroom_or_post,currentChat);
+              this.post(msg,chatroom_or_post);
               break;
             case "JOIN":
-              EchoServerMultiThreaded.leaveChatroom(this,currentChat);
-              currentChat = EchoServerMultiThreaded.joinChatroom(this,chatroom_or_post);
-              EchoServerMultiThreaded.publishMessage(msg+"has joined the room.",currentChat);
+              this.leave(msg);
+              this.join(msg,chatroom_or_post);
               break;
           }
         }
@@ -76,13 +69,10 @@ extends Thread {
         {
           switch(tag){
             case "CREATE":
-              EchoServerMultiThreaded.createChatroom(chatroom_or_post);
-              currentChat = EchoServerMultiThreaded.joinChatroom(this,chatroom_or_post);
-              EchoServerMultiThreaded.publishMessage(msg+"has created the chatroom "+chatroom_or_post,currentChat);
+              this.create(msg,chatroom_or_post);
               break;
             case "JOIN":
-              currentChat = EchoServerMultiThreaded.joinChatroom(this,chatroom_or_post);
-              EchoServerMultiThreaded.publishMessage(msg+"has joined the room.",currentChat);
+              this.join(msg,chatroom_or_post);
               break;
             default:
               socOut.println("You must join a chatroom first");
@@ -97,6 +87,27 @@ extends Thread {
 
   public void sendMessageToClient(String msg){
     socOut.println(msg);
+  }
+
+  private void create(String msg, String chatroom){
+              EchoServerMultiThreaded.createChatroom(chatroom);
+              currentChat = EchoServerMultiThreaded.joinChatroom(this,chatroom);
+              EchoServerMultiThreaded.publishMessage(msg+ "has created the chatroom "+chatroom,currentChat);
+  }
+
+  private void join(String msg, String chatroom){
+              currentChat = EchoServerMultiThreaded.joinChatroom(this,chatroom);
+              EchoServerMultiThreaded.publishMessage(msg+"has joined the room.",currentChat);
+  }
+  
+  private void leave(String msg){
+              EchoServerMultiThreaded.leaveChatroom(this,currentChat);
+              EchoServerMultiThreaded.publishMessage(msg+"has left.",currentChat);
+              currentChat = null;
+  }
+
+  private void post(String msg, String post){
+              EchoServerMultiThreaded.publishMessage(msg+post,currentChat);
   }
 
 }

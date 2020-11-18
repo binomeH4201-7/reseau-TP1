@@ -21,10 +21,10 @@ Contenu d'un message :
     - date
     - contenu
  Format :
- TAG$DATE$PSEUDO$msg
+ TAG$POST
  tag possibles :
-    - JOIN (msg contains the name of the chatroom)
-    - LEAVE
-    - CREATE (msg contains the name of the chatroom)
-    - POST
+    - JOIN (post : DATE$PSEUDO$CHATROOM)
+    - LEAVE (post : DATE$PSEUDO)
+    - CREATE (post : DATE$PSEUDO$CHATROOM)
+    - POST (post : DATE$PSEUDO$MSG);
  date au format "jj/MM/yyyy HH:mm"
