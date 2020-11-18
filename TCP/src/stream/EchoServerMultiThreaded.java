@@ -10,6 +10,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.File;
 
 public class EchoServerMultiThreaded  {
 
@@ -31,7 +32,8 @@ public class EchoServerMultiThreaded  {
     }
     try {
       listenSocket = new ServerSocket(Integer.parseInt(args[0])); //port
-      System.out.println("Server ready..."); 
+      System.out.println("Server ready...");
+      loadChatrooms();
       while (true) {
         Socket clientSocket = listenSocket.accept();
         System.out.println("Connexion from:" + clientSocket.getInetAddress());
@@ -57,6 +59,7 @@ public class EchoServerMultiThreaded  {
     for(Chatroom chat : chatroomList){
       if(chat.getName().equals(nameChat)){
         chat.join(ct);
+        publishHistory(ct,chat);
         return chat;
       }
     }
@@ -86,5 +89,25 @@ public class EchoServerMultiThreaded  {
 
   private static void saveMessage(String msg, Chatroom chat){
     chat.addMessageToHistory(msg);
+  }
+
+  private static void publishHistory(ClientThread ct, Chatroom chat){
+    for(String s : chat.getHistory()){
+      ct.sendMessageToClient(s);
+    }
+  }
+
+  private static void loadChatrooms(){
+    File rep = new File("./history");
+    String tmp = ".save";
+    String [] listFiles = rep.list();
+    for(String s : listFiles){
+      if(s.endsWith(tmp)){
+        String name = s.substring(0,s.length()-tmp.length());
+        Chatroom chat = new Chatroom(name);
+        chatroomList.add(chat);
+        System.out.println("chatroom "+name+" has been loaded.");
+      }
+    }
   }
 }
