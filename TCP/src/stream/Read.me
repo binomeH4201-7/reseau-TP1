@@ -20,3 +20,11 @@ Contenu d'un message :
     - pseudonyme
     - date
     - contenu
+ Format :
+ TAG$POST
+ tag possibles :
+    - JOIN (post : DATE$PSEUDO$CHATROOM)
+    - LEAVE (post : DATE$PSEUDO)
+    - CREATE (post : DATE$PSEUDO$CHATROOM)
+    - POST (post : DATE$PSEUDO$MSG);
+ date au format "jj/MM/yyyy HH:mm"
