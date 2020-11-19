@@ -18,6 +18,7 @@ public class EchoClient {
   private BufferedReader socIn;
   private String pseudo;
   private GraphicalInterface ihm;
+  private ThreadDisplay td;
 
   /**
    *  main method
@@ -42,16 +43,16 @@ public class EchoClient {
       System.exit(1);
     }
 
-    ThreadDisplay td = new ThreadDisplay(ihm);
+    td = new ThreadDisplay(ihm);
     td.start();
-
   }
 
   public void disconnectFromServer(){
     try{
+      echoSocket.close();
       socIn.close();
       socOut.close();
-      echoSocket.close();
+      td.arret();
     } catch(Exception e){
       System.err.println("Error while closing the streams : "+e);
     }
@@ -99,19 +100,24 @@ public class EchoClient {
 
   public class ThreadDisplay extends Thread{
     GraphicalInterface ihm;
+    boolean running;
 
     public ThreadDisplay(GraphicalInterface g){
       this.ihm = g;
+      this.running = true;
+    }
+
+    public void arret(){
+      running = false;
     }
 
     public void run(){
-      while(true){
-        try{
+      while(running) {
+        try {
           String line = socIn.readLine();
           ihm.publishMessage(line);
-        }
-        catch(Exception e){
-          System.err.println("Error while trying to print message : "+e);
+        } catch (Exception e) {
+          System.err.println("Error while trying to print message : " + e);
         }
       }
     }

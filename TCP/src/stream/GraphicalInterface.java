@@ -303,6 +303,7 @@ public class GraphicalInterface extends JFrame {
 
         @Override
         public void actionPerformed(final ActionEvent e) {
+            chatTextArea.setText("");
             echoClient.disconnectFromServer();
         }
     }
@@ -329,6 +330,7 @@ public class GraphicalInterface extends JFrame {
 
         @Override
         public void actionPerformed(final ActionEvent e) {
+            chatTextArea.setText("");
             echoClient.leave();
         }
     }
