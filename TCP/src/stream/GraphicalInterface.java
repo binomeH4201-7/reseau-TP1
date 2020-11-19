@@ -257,7 +257,7 @@ public class GraphicalInterface extends JFrame {
         serverPortTextField = new JTextField("5100");
         pseudonymTextField = new JTextField("INSA User");
 
-        chatRoomNameTextField = new JTextField("hexanôme");
+        chatRoomNameTextField = new JTextField("hexanome");
 
             //Text Field Border
             serverIpTextField.setMaximumSize(new Dimension(400,20));
@@ -295,7 +295,7 @@ public class GraphicalInterface extends JFrame {
 
         @Override
         public void actionPerformed(final ActionEvent e) {
-            //echoClient.connect(serverIpTextField.getText(),Integer.parseInt(serverPortTextField.getText()),pseudonymTextField.getText());
+            echoClient.connectToServer(serverIpTextField.getText(),Integer.parseInt(serverPortTextField.getText()),pseudonymTextField.getText());
         }
     }
 
@@ -303,7 +303,7 @@ public class GraphicalInterface extends JFrame {
 
         @Override
         public void actionPerformed(final ActionEvent e) {
-            //echoClient.disconnectFromServer();
+            echoClient.disconnectFromServer();
         }
     }
 
@@ -312,7 +312,7 @@ public class GraphicalInterface extends JFrame {
         @Override
         public void actionPerformed(final ActionEvent e) {
             chatTextArea.setText("");
-            //echoClient.create(chatRoomNameTextField.getText());
+            echoClient.create(chatRoomNameTextField.getText());
         }
     }
 
@@ -321,7 +321,7 @@ public class GraphicalInterface extends JFrame {
         @Override
         public void actionPerformed(final ActionEvent e) {
             chatTextArea.setText("");
-            //echoClient.join(chatRoomNameTextField.getText());
+            echoClient.join(chatRoomNameTextField.getText());
         }
     }
 
@@ -329,7 +329,7 @@ public class GraphicalInterface extends JFrame {
 
         @Override
         public void actionPerformed(final ActionEvent e) {
-            //echoClient.leave();
+            echoClient.leave();
         }
     }
 
@@ -337,7 +337,7 @@ public class GraphicalInterface extends JFrame {
 
         @Override
         public void actionPerformed(final ActionEvent e) {
-            //echoClient.send(messageTextArea.getText());
+            echoClient.post(messageTextArea.getText());
         }
     }
 

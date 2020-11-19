@@ -11,6 +11,10 @@ public class Chatroom {
   public Chatroom(String name){
     this.name = name;
     this.connectedClientsList = new LinkedList<ClientThread>();
+    File save = new File(".\\history\\"+name+".save");
+    try {
+      save.createNewFile();
+    }catch (Exception e){e.printStackTrace();}
   }
 
   public void join(ClientThread ct){

@@ -7,7 +7,7 @@ Authors: BUONOMO Phanie - BATEL Arthur
 
 import java.io.*;
 import java.net.*;
-import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.time.LocalTime;
 
 
@@ -42,15 +42,9 @@ public class EchoClient {
       System.exit(1);
     }
 
-    while(true){
-      try{
-        String line = socIn.readLine();
-        ihm.publishMessage(line);
-      }
-      catch(Exception e){
-        System.err.println("Error while trying to print message : "+e);
-      }
-    } 
+    ThreadDisplay td = new ThreadDisplay(ihm);
+    td.start();
+
   }
 
   public void disconnectFromServer(){
@@ -66,8 +60,8 @@ public class EchoClient {
   public void join(String chatroom){
     String request = "JOIN$";
     LocalTime date = LocalTime.now();
-    SimpleDateFormat format = new SimpleDateFormat("d/M/y H:m");
-    String dateString = format.format(date);
+    DateTimeFormatter format = DateTimeFormatter.ofPattern("H:m");
+    String dateString = date.format(format);
     request +=dateString+"$"+this.pseudo+"$"+chatroom;
     socOut.println(request);
   }
@@ -75,8 +69,8 @@ public class EchoClient {
   public void create(String chatroom){
     String request = "CREATE$";
     LocalTime date = LocalTime.now();
-    SimpleDateFormat format = new SimpleDateFormat("d/M/y H:m");
-    String dateString = format.format(date);
+    DateTimeFormatter format = DateTimeFormatter.ofPattern("H:m");
+    String dateString = date.format(format);
     request +=dateString+"$"+this.pseudo+"$"+chatroom;
     socOut.println(request);
   }
@@ -84,8 +78,8 @@ public class EchoClient {
   public void leave(){
     String request = "LEAVE$";
     LocalTime date = LocalTime.now();
-    SimpleDateFormat format = new SimpleDateFormat("d/M/y H:m");
-    String dateString = format.format(date);
+    DateTimeFormatter format = DateTimeFormatter.ofPattern("H:m");
+    String dateString = date.format(format);
     request +=dateString+"$"+this.pseudo;
     socOut.println(request);
   }
@@ -93,13 +87,33 @@ public class EchoClient {
   public void post(String msg){
     String request = "POST$";
     LocalTime date = LocalTime.now();
-    SimpleDateFormat format = new SimpleDateFormat("d/M/y H:m");
-    String dateString = format.format(date);
+    DateTimeFormatter format = DateTimeFormatter.ofPattern("H:m");
+    String dateString = date.format(format);
     request +=dateString+"$"+this.pseudo+"$"+msg;
     socOut.println(request);
   }
 
   public void setInterface(GraphicalInterface g){
     ihm = g;
+  }
+
+  public class ThreadDisplay extends Thread{
+    GraphicalInterface ihm;
+
+    public ThreadDisplay(GraphicalInterface g){
+      this.ihm = g;
+    }
+
+    public void run(){
+      while(true){
+        try{
+          String line = socIn.readLine();
+          ihm.publishMessage(line);
+        }
+        catch(Exception e){
+          System.err.println("Error while trying to print message : "+e);
+        }
+      }
+    }
   }
 }

@@ -100,14 +100,17 @@ public class EchoServerMultiThreaded  {
   private static void loadChatrooms(){
     File rep = new File("./history");
     String tmp = ".save";
-    String [] listFiles = rep.list();
-    for(String s : listFiles){
-      if(s.endsWith(tmp)){
-        String name = s.substring(0,s.length()-tmp.length());
-        Chatroom chat = new Chatroom(name);
-        chatroomList.add(chat);
-        System.out.println("chatroom "+name+" has been loaded.");
+    String[] listFiles = rep.list();
+    if(listFiles != null){
+      for(String s : listFiles){
+        if(s.endsWith(tmp)){
+          String name = s.substring(0,s.length()-tmp.length());
+          Chatroom chat = new Chatroom(name);
+          chatroomList.add(chat);
+          System.out.println("chatroom "+name+" has been loaded.");
+        }
       }
     }
+
   }
 }
