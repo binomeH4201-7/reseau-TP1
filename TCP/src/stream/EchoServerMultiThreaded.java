@@ -99,6 +99,7 @@ public class EchoServerMultiThreaded  {
 
   private static void loadChatrooms(){
     File rep = new File("./history");
+    rep.mkdir();
     String tmp = ".save";
     String[] listFiles = rep.list();
     if(listFiles != null){
