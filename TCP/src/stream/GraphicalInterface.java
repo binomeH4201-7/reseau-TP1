@@ -288,7 +288,7 @@ public class GraphicalInterface extends JFrame {
     }
 
     public void publishMessage(String msg) {
-        chatTextArea.setText(chatTextArea.getText()+msg);
+        chatTextArea.setText(chatTextArea.getText()+msg+"\n");
     }
 
     public class ConnectToServer implements ActionListener {
