@@ -1,62 +1,105 @@
 /*
- EchoClient
- Example of a TCP client
- Date: 10/01/04
- Authors: BUONOMO Phanie - BATEL Arthur
+   EchoClient
+   Example of a TCP client
+Date: 10/01/04
+Authors: BUONOMO Phanie - BATEL Arthur
  */
 
 import java.io.*;
 import java.net.*;
+import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 
 
 public class EchoClient {
 
- 
+  private Socket echoSocket;
+  private PrintStream socOut;
+  private BufferedReader socIn;
+  private String pseudo;
+  private GraphicalInterface ihm;
+
   /**
-  *  main method
-  *  accepts a connection, receives a message from client then sends an echo to the client
-  **/
-    public static void main(String[] args) throws IOException {
-        GraphicalInterface g = new GraphicalInterface("TCP chat");
+   *  main method
+   *  accepts a connection, receives a message from client then sends an echo to the client
+   **/
 
-        Socket echoSocket = null;
-        PrintStream socOut = null;
-        BufferedReader stdIn = null;
-
-        if (args.length != 2) {
-          System.out.println("Usage: java EchoClient <EchoServer host> <EchoServer port>");
-          System.exit(1);
-        }
-
-        try {
-      	    // creation socket ==> connexion
-      	    echoSocket = new Socket(args[0], Integer.parseInt(args[1]));
-
-            //thread d'affichage des retours
-
-            //Canaux de récupréation des messages et d'envoi
-    		    socOut= new PrintStream(echoSocket.getOutputStream());
-    		    stdIn = new BufferedReader(new InputStreamReader(System.in));
-        } catch (UnknownHostException e) {
-            System.err.println("Don't know about host:" + args[0]);
-            System.exit(1);
-        } catch (IOException e) {
-            System.err.println("Couldn't get I/O for "
-                               + "the connection to:"+ args[0]);
-            System.exit(1);
-        }
-                             
-        String line;
-        while (true) {
-        	line = stdIn.readLine();
-        	if (line.equals(".")) break;
-        	g.publishMessage(line);
-        	socOut.println(line);
-        }
-      socOut.close();
-      stdIn.close();
-      echoSocket.close();
+  public void connectToServer(String ip, int port, String pseudo){
+    echoSocket = null;
+    socOut = null;
+    socIn = null;
+    this.pseudo = pseudo;
+    try{
+      echoSocket = new Socket(ip,port);
+      socOut = new PrintStream(echoSocket.getOutputStream());
+      socIn = new BufferedReader( new InputStreamReader(echoSocket.getInputStream()));
+    } catch (UnknownHostException e) {
+      System.err.println("Don't know about host:" + ip);
+      System.exit(1);
+    } catch (IOException e) {
+      System.err.println("Couldn't get I/O for "
+          + "the connection to:"+ ip);
+      System.exit(1);
     }
+
+    while(true){
+      try{
+        String line = socIn.readLine();
+        ihm.publishMessage(line);
+      }
+      catch(Exception e){
+        System.err.println("Error while trying to print message : "+e);
+      }
+    } 
+  }
+
+  public void disconnectFromServer(){
+    try{
+      socIn.close();
+      socOut.close();
+      echoSocket.close();
+    } catch(Exception e){
+      System.err.println("Error while closing the streams : "+e);
+    }
+  }
+
+  public void join(String chatroom){
+    String request = "JOIN$";
+    LocalTime date = LocalTime.now();
+    SimpleDateFormat format = new SimpleDateFormat("d/M/y H:m");
+    String dateString = format.format(date);
+    request +=dateString+"$"+this.pseudo+"$"+chatroom;
+    socOut.println(request);
+  }
+
+  public void create(String chatroom){
+    String request = "CREATE$";
+    LocalTime date = LocalTime.now();
+    SimpleDateFormat format = new SimpleDateFormat("d/M/y H:m");
+    String dateString = format.format(date);
+    request +=dateString+"$"+this.pseudo+"$"+chatroom;
+    socOut.println(request);
+  }
+
+  public void leave(){
+    String request = "LEAVE$";
+    LocalTime date = LocalTime.now();
+    SimpleDateFormat format = new SimpleDateFormat("d/M/y H:m");
+    String dateString = format.format(date);
+    request +=dateString+"$"+this.pseudo;
+    socOut.println(request);
+  }
+
+  public void post(String msg){
+    String request = "POST$";
+    LocalTime date = LocalTime.now();
+    SimpleDateFormat format = new SimpleDateFormat("d/M/y H:m");
+    String dateString = format.format(date);
+    request +=dateString+"$"+this.pseudo+"$"+msg;
+    socOut.println(request);
+  }
+
+  public void setInterface(GraphicalInterface g){
+    ihm = g;
+  }
 }
-
-
