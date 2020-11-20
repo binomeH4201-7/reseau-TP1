@@ -3,7 +3,7 @@
 JC = javac
 JE = java
 JCP = -classpath ./classes/
-JOPT = -d ./classes
+JOPT = -d ./classes -sourcepath ./src
 
 SOURCES = ${wildcard src/*.java}
 CLASSES = ${SOURCES:src/%.java=classes/%.class}
@@ -24,7 +24,7 @@ classes/%.class : src/%.java
 
 cleanCode :
 	@echo "Suppression des fichiers compilés."
-	@rm ./classes/src/*.class -vf
+	@rm ./classes/*.class -vf
 
 cleanHistory :
 	@echo "Suppression des sauvegardes d'historiques."
