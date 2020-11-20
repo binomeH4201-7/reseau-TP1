@@ -90,14 +90,20 @@ extends Thread {
   }
 
   private void create(String msg, String chatroom){
-              EchoServerMultiThreaded.createChatroom(chatroom);
-              currentChat = EchoServerMultiThreaded.joinChatroom(this,chatroom);
-              EchoServerMultiThreaded.publishMessage(msg+ "has created the chatroom "+chatroom,currentChat);
+              if(EchoServerMultiThreaded.createChatroom(chatroom)){
+              	currentChat = EchoServerMultiThreaded.joinChatroom(this,chatroom);
+              	EchoServerMultiThreaded.publishMessage(msg+ "has created the chatroom "+chatroom,currentChat);
+              	} else {
+              		this.join(msg,chatroom);
+          		}
   }
 
   private void join(String msg, String chatroom){
               currentChat = EchoServerMultiThreaded.joinChatroom(this,chatroom);
-              EchoServerMultiThreaded.publishMessage(msg+"has joined the room.",currentChat);
+              if(currentChat == null)
+              	this.create(msg,chatroom);
+              else
+              	EchoServerMultiThreaded.publishMessage(msg+"has joined the room.",currentChat);
   }
   
   private void leave(String msg){

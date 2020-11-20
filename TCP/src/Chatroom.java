@@ -11,6 +11,8 @@ public class Chatroom {
   public Chatroom(String name){
     this.name = name;
     this.connectedClientsList = new LinkedList<ClientThread>();
+    File rep = new File("./history");
+    rep.mkdir();
     File save = new File("./history/"+name+".save");
     try {
       save.createNewFile();

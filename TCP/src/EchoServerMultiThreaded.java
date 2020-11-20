@@ -46,9 +46,15 @@ public class EchoServerMultiThreaded  {
     }
   }
 
-  public static void createChatroom(String chatName){
+  public static boolean createChatroom(String chatName){
+    for(Chatroom chat : chatroomList){
+      if(chat.getName().equals(chatName)){
+        return false;
+      }
+    }
     Chatroom chat = new Chatroom(chatName);
     chatroomList.add(chat);
+    return true;
   }
 
   private static void addConnectedThread(ClientThread ct){
