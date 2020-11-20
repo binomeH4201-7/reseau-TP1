@@ -24,7 +24,7 @@ classes/%.class : src/%.java
 
 cleanCode :
 	@echo "Suppression des fichiers compilés."
-	@rm $(CLASSES) -vf
+	@rm ./classes/*.class -vf
 
 cleanHistory :
 	@echo "Suppression des sauvegardes d'historiques."
