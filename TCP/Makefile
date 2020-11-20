@@ -1,4 +1,4 @@
-.PHONY: all, help, cleanCode, cleanHistory, clean, start-server, start-client
+.PHONY: all, help, cleanCode, cleanHistory, clean
 
 JC = javac
 JE = java
@@ -32,12 +32,12 @@ cleanHistory :
 
 clean : cleanCode cleanHistory
 
-start-client :
+start-client : all
 	$(JE) $(JCP) $(CLIENT)
 
-start-server :
-	@$(JE) $(JCP) $(SERVER) $(port)
+start-server : all
 	@echo "Serveur lancé sur le port $(port)"
+	@$(JE) $(JCP) $(SERVER) $(port)
 	
 help :
 	@echo "======================================================="
