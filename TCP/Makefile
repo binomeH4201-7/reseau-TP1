@@ -9,8 +9,8 @@ SOURCES = ${wildcard src/*.java}
 CLASSES = ${SOURCES:src/%.java=classes/%.class}
 HISTORY = ${wildcard history/*.save}
 
-SERVER = src.EchoServerMultiThreaded
-CLIENT = src.ClientLauncher
+SERVER = EchoServerMultiThreaded
+CLIENT = ClientLauncher
 DEFAULT_PORT = 5100
 
 port ?= $(DEFAULT_PORT)
@@ -36,14 +36,8 @@ start-client :
 	$(JE) $(JCP) $(CLIENT)
 
 start-server :
-	@echo "Port par défaut : $(DEFAULT_PORT)"
-	@echo "Pour lancer le serveur sur un autre port :"
-	@echo "     make start-server port=<numero-port>"
-	@echo
-	@echo "=========================================="
-	@echo
-	@echo "Serveur lancé sur le port $(port)"
 	@$(JE) $(JCP) $(SERVER) $(port)
+	@echo "Serveur lancé sur le port $(port)"
 	
 help :
 	@echo "======================================================="
