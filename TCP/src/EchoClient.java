@@ -34,10 +34,13 @@ public class EchoClient {
       echoSocket = new Socket(ip,port);
       socOut = new PrintStream(echoSocket.getOutputStream());
       socIn = new BufferedReader( new InputStreamReader(echoSocket.getInputStream()));
+      ihm.publishConnexionState("Server connected");
     } catch (UnknownHostException e) {
+      ihm.publishConnexionState("Don't know about host:" + ip);
       System.err.println("Don't know about host:" + ip);
       System.exit(1);
     } catch (IOException e) {
+      ihm.publishConnexionState("Couldn't get I/O for " + "the connection to:"+ ip);
       System.err.println("Couldn't get I/O for "
           + "the connection to:"+ ip);
       System.exit(1);
@@ -53,7 +56,9 @@ public class EchoClient {
       socIn.close();
       socOut.close();
       td.arret();
+      ihm.publishConnexionState("Server disconnected");
     } catch(Exception e){
+      ihm.publishConnexionState("Error while closing the streams");
       System.err.println("Error while closing the streams : "+e);
     }
   }

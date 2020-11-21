@@ -1,5 +1,6 @@
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.DefaultCaret;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -237,6 +238,8 @@ public class GraphicalInterface extends JFrame {
             chatTextArea.setLineWrap(true);
             chatTextArea.setEditable(false);
             chatTextArea.setBorder(new EmptyBorder(0,10,0,10));
+            DefaultCaret caret = (DefaultCaret)chatTextArea.getCaret();
+            caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 
             messageTextArea.setLineWrap(true);
             messageTextArea.setMaximumSize(new Dimension(400,100));
