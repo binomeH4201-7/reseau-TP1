@@ -54,6 +54,7 @@ public class EchoServerMultiThreaded  {
     }
     Chatroom chat = new Chatroom(chatName);
     chatroomList.add(chat);
+    inform(chatName);
     return true;
   }
 
@@ -80,9 +81,9 @@ public class EchoServerMultiThreaded  {
     chat.leave(ct);
   }
 
-  public static void publishMessage(String msg){
+  public static void inform(String info){
     for(ClientThread ct : connectedThreadList){
-      ct.sendMessageToClient(msg);
+      ct.sendInformationToClient(info);
     }
   }
 
@@ -100,6 +101,12 @@ public class EchoServerMultiThreaded  {
   private static void publishHistory(ClientThread ct, Chatroom chat){
     for(String s : chat.getHistory()){
       ct.sendMessageToClient(s);
+    }
+  }
+
+  public static void chatRoomListInform(ClientThread ct){
+  for(Chatroom chat : chatroomList) {
+      ct.sendInformationToClient(chat.getName());
     }
   }
 

@@ -24,14 +24,14 @@ extends Thread {
 
   /**
    * receives a request from client then sends an echo to the client
-   * @param clientSocket the client socket
    **/
   public void run() {
     try {
-      BufferedReader socIn = null;
+      BufferedReader socIn;
       socIn = new BufferedReader(
           new InputStreamReader(clientSocket.getInputStream()));    
       socOut = new PrintStream(clientSocket.getOutputStream());
+      EchoServerMultiThreaded.chatRoomListInform(this);
       while (true) {
         String line = socIn.readLine();
         String[] sublines = line.split("\\$",4);
@@ -86,7 +86,11 @@ extends Thread {
   }
 
   public void sendMessageToClient(String msg){
-    socOut.println(msg);
+    socOut.println("PUBLISH$"+msg);
+  }
+
+  public void sendInformationToClient(String info){
+    socOut.println("INFORM$"+info);
   }
 
   private void create(String msg, String chatroom){

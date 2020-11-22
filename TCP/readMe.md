@@ -13,6 +13,6 @@
 |CREATE|DATE$PSEUDO$CHATROOM|server <- client|Create a chatroom|
 |POST|DATE$PSEUDO$MSG|server <- client|Post a message|
 |PUBLISH|MSG|server -> client|Publish a message|
-|INFORM|DATE$PSEUDO$MSG|server -> client|Inform about the existing chatrooms|
+|INFORM|CHATROOMNAME|server -> client|Inform about an existing chatroom|
 
  

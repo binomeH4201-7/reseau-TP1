@@ -120,7 +120,18 @@ public class EchoClient {
       while(running) {
         try {
           String line = socIn.readLine();
-          ihm.publishMessage(line);
+          String[] sublines = line.split("\\$");
+          String tag = sublines[0];
+
+          switch(tag) {
+            case "PUBLISH":
+              ihm.publishMessage(sublines[1]);
+              break;
+            case "INFORM":
+              System.out.println(sublines[1]);
+              ihm.addChatRoom(sublines[1]);
+              break;
+          }
         } catch (Exception e) {
           System.err.println("Error while trying to print message : " + e);
         }
