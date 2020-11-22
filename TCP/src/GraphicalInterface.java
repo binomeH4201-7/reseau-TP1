@@ -86,7 +86,7 @@ public class GraphicalInterface extends JFrame implements ListSelectionListener 
 
         setButtons(true,false,false,false, false, false);
 
-        //Add listeners to buttons
+            //Add listeners to buttons
             serverConnectBtn.addActionListener(new ConnectToServer());
             serverDisconnectBtn.addActionListener(new DisconnectFromServer());
             chatRoomCreateBtn.addActionListener(new CreateChatRoom());
@@ -94,63 +94,24 @@ public class GraphicalInterface extends JFrame implements ListSelectionListener 
             chatRoomLeaveBtn.addActionListener(new LeaveChatRoom());
             msgSendBtn.addActionListener(new SendMessage());
 
-            //Prefered Size
-            this.serverConnectBtn.setPreferredSize(new Dimension(40,20));
-            this.serverDisconnectBtn.setPreferredSize(new Dimension(40,20));
-
-            this.chatRoomCreateBtn.setPreferredSize(new Dimension(40,20));
-            this.chatRoomJoinBtn.setPreferredSize(new Dimension(40,20));
-            this.chatRoomLeaveBtn.setPreferredSize(new Dimension(40,20));
-
-            this.msgSendBtn.setPreferredSize(new Dimension(600,260));
-
-        //Labels initialisation, addition to container
+        //Labels initialisation
 
         serverIpLabel = new JLabel("Server Ip", SwingConstants.RIGHT);
         serverPortLabel = new JLabel("Port",SwingConstants.RIGHT);
         pseudonymLabel = new JLabel("Pseudonym",SwingConstants.RIGHT);
         connexionStateLabel = new JLabel("Connexion state",SwingConstants.RIGHT);
         connexionStateMsgLabel = new JLabel("Starting ...",SwingConstants.LEFT);
-
-        chatRoomLabel = new JLabel("Chat room",SwingConstants.RIGHT);
-
+        chatRoomLabel = new JLabel("Chat rooms",SwingConstants.LEFT);
         messageLabel = new JLabel("Message",SwingConstants.RIGHT);
 
-            //Prefered Size
-            this.serverIpLabel.setPreferredSize(new Dimension(120,20));
-            this.serverPortLabel.setPreferredSize(new Dimension(120,20));
-            this.pseudonymLabel.setPreferredSize(new Dimension(120,20));
-            this.connexionStateLabel.setPreferredSize(new Dimension(120,20));
-            this.connexionStateMsgLabel.setMinimumSize(new Dimension(400,20));
-
-            this.chatRoomLabel.setPreferredSize(new Dimension(120,20));
-
-            this.messageLabel.setPreferredSize(new Dimension(120,20));
-
-            //Borders
-            this.serverIpLabel.setBorder(new EmptyBorder(0,0,0,10));
-            this.serverPortLabel.setBorder(new EmptyBorder(0,0,0,10));
-            this.pseudonymLabel.setBorder(new EmptyBorder(0,0,0,10));
-            this.connexionStateLabel.setBorder(new EmptyBorder(0,0,0,10));
-            this.connexionStateMsgLabel.setBorder(new EmptyBorder(0,20,0,80));
-
-            this.chatRoomLabel.setBorder(new EmptyBorder(0,0,0,10));
-
-            this.messageLabel.setBorder(new EmptyBorder(0,0,0,10));
-
-            //Text Area initialisation
-            chatTextArea = new JTextArea("Loading messages...");
-            messageTextArea = new JTextArea("Salut tout le monde !");
-
-            chatTextArea.setLineWrap(true);
-            chatTextArea.setEditable(false);
-            chatTextArea.setBorder(new EmptyBorder(0,10,0,10));
-            DefaultCaret caret = (DefaultCaret)chatTextArea.getCaret();
-            caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
-
-            messageTextArea.setLineWrap(true);
-            messageTextArea.setMaximumSize(new Dimension(400,100));
-            messageTextArea.setBorder(new EmptyBorder(0,0,0,10));
+        //Text Area initialisation
+        chatTextArea = new JTextArea("Loading messages...");
+        chatTextArea.setLineWrap(true);
+        chatTextArea.setEditable(false);
+        DefaultCaret caret = (DefaultCaret)chatTextArea.getCaret();
+        caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
+        messageTextArea = new JTextArea("Salut tout le monde !");
+        messageTextArea.setLineWrap(true);
 
         //List initialisation
         chatRoomListModel = new DefaultListModel();
@@ -166,23 +127,11 @@ public class GraphicalInterface extends JFrame implements ListSelectionListener 
         listScrollPane =  new JScrollPane(chatRoomList);
         listScrollPane.createHorizontalScrollBar();
 
-            //Prefered Size
-            this.messageScrollPane.setPreferredSize(new Dimension(400,620));
-            this.listScrollPane.setPreferredSize(new Dimension(400,60));
-
         //Text Fields initialisation
         serverIpTextField = new JTextField("0.0.0.0");
         serverPortTextField = new JTextField("5100");
         pseudonymTextField = new JTextField("INSA User");
-
         chatRoomNameTextField = new JTextField("hexanome");
-
-            //Text Field Border
-            serverIpTextField.setMaximumSize(new Dimension(400,20));
-            serverPortTextField.setMaximumSize(new Dimension(400,20));
-            pseudonymTextField.setMaximumSize(new Dimension(400,20));
-
-            chatRoomNameTextField.setMaximumSize(new Dimension(400,20));
 
         //Containers initialisation
         this.chatPanel = new JPanel();
@@ -203,48 +152,9 @@ public class GraphicalInterface extends JFrame implements ListSelectionListener 
         this.messageTypingPanel = new JPanel();
         this.messageButtonPanel = new JPanel();
 
-            //Prefered Size
-            this.chatPanel.setPreferredSize(new Dimension(400,620));
-            this.interactionPanel.setPreferredSize(new Dimension(600,620));
-
-            this.serverPanel.setPreferredSize(new Dimension(600,240));
-            this.serverIpPanel.setPreferredSize(new Dimension(600,40));
-            this.serverPortPanel.setPreferredSize(new Dimension(600,40));
-            this.serverPseudonymPanel.setPreferredSize(new Dimension(600,40));
-            this.serverStatePanel.setPreferredSize(new Dimension(600,40));
-            this.serverButtonPanel.setPreferredSize(new Dimension(600,40));
-
-            this.chatRoomPanel.setPreferredSize(new Dimension(600,120));
-            this.chatRoomNamePanel.setPreferredSize(new Dimension(600,40));
-            this.chatRoomButtonPanel.setPreferredSize(new Dimension(600,40));
-
-            this.messagePanel.setPreferredSize(new Dimension(600,260));
-            this.messageTypingPanel.setPreferredSize(new Dimension(600,100));
-            this.messageButtonPanel.setPreferredSize(new Dimension(600,40));
-
-
-            //Add Layout
-            this.chatPanel.setLayout(new BoxLayout(chatPanel, BoxLayout.Y_AXIS));
-            this.interactionPanel.setLayout(new BoxLayout(interactionPanel, BoxLayout.Y_AXIS));
-
-            this.serverPanel.setLayout(new BoxLayout(serverPanel, BoxLayout.Y_AXIS));
-            this.serverIpPanel.setLayout(new BoxLayout(serverIpPanel, BoxLayout.X_AXIS));
-            this.serverPortPanel.setLayout(new BoxLayout(serverPortPanel, BoxLayout.X_AXIS));
-            this.serverPseudonymPanel.setLayout(new BoxLayout(serverPseudonymPanel, BoxLayout.X_AXIS));
-            this.serverStatePanel.setLayout(new BoxLayout(serverStatePanel, BoxLayout.X_AXIS));
-            this.serverButtonPanel.setLayout(new BoxLayout(serverButtonPanel, BoxLayout.X_AXIS));
-
-            this.chatRoomPanel.setLayout(new BoxLayout(chatRoomPanel, BoxLayout.Y_AXIS));
-            this.chatRoomNamePanel.setLayout(new BoxLayout(chatRoomNamePanel, BoxLayout.X_AXIS));
-            this.chatRoomButtonPanel.setLayout(new BoxLayout(chatRoomButtonPanel, BoxLayout.X_AXIS));
-
-            this.messagePanel.setLayout(new BoxLayout(messagePanel, BoxLayout.Y_AXIS));
-            this.messageTypingPanel.setLayout(new BoxLayout(messageTypingPanel, BoxLayout.X_AXIS));
-            this.messageButtonPanel.setLayout(new BoxLayout(messageButtonPanel, BoxLayout.X_AXIS));
-
-            //Add objects to panels
-            serverIpPanel.add(serverIpLabel);
-            serverIpPanel.add(serverIpTextField);
+        //Add objects to panels
+        serverIpPanel.add(serverIpLabel);
+        serverIpPanel.add(serverIpTextField);
 
         serverPortPanel.add(serverPortLabel);
         serverPortPanel.add(serverPortTextField);
@@ -259,9 +169,13 @@ public class GraphicalInterface extends JFrame implements ListSelectionListener 
         serverButtonPanel.add(serverDisconnectBtn);
 
         serverPanel.add(serverIpPanel);
+        serverPanel.add(Box.createVerticalStrut(10));
         serverPanel.add(serverPortPanel);
+        serverPanel.add(Box.createVerticalStrut(10));
         serverPanel.add(serverPseudonymPanel);
+        serverPanel.add(Box.createVerticalStrut(10));
         serverPanel.add(serverStatePanel);
+        serverPanel.add(Box.createVerticalStrut(10));
         serverPanel.add(serverButtonPanel);
 
         chatRoomNamePanel.add(chatRoomLabel);
@@ -273,6 +187,7 @@ public class GraphicalInterface extends JFrame implements ListSelectionListener 
         chatRoomButtonPanel.add(chatRoomCreateBtn);
 
         chatRoomPanel.add(chatRoomNamePanel);
+        serverPanel.add(Box.createVerticalStrut(5));
         chatRoomPanel.add(chatRoomButtonPanel);
 
         messageTypingPanel.add(messageLabel);
@@ -281,28 +196,125 @@ public class GraphicalInterface extends JFrame implements ListSelectionListener 
         messageButtonPanel.add(msgSendBtn);
 
         messagePanel.add(messageTypingPanel);
+        serverPanel.add(Box.createVerticalStrut(5));
         messagePanel.add(messageButtonPanel);
 
         interactionPanel.add(serverPanel);
+        serverPanel.add(Box.createVerticalStrut(5));
+        interactionPanel.add(new JSeparator(SwingConstants.HORIZONTAL));
+        serverPanel.add(Box.createVerticalStrut(5));
         interactionPanel.add(chatRoomPanel);
+        serverPanel.add(Box.createVerticalStrut(5));
+        interactionPanel.add(new JSeparator(SwingConstants.HORIZONTAL));
+        serverPanel.add(Box.createVerticalStrut(5));
         interactionPanel.add(messagePanel);
-        //TODO mettre des séparations interactionPanel.add(Box.createHorizontalStrut(5));
-        //TODO mettre des séparations interactionPanel.add(new JSeparator(SwingConstants.VERTICAL));
-        //TODO interactionPanel.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
 
         chatPanel.add(messageScrollPane);
 
+        //Disposition
+        serverIpLabel.setPreferredSize(new Dimension(120,20));
+        serverIpLabel.setBorder(new EmptyBorder(0,0,0,10));
+
+        serverIpTextField.setMaximumSize(new Dimension(400,20));
+
+        serverPortLabel.setPreferredSize(new Dimension(120,20));
+        serverPortLabel.setBorder(new EmptyBorder(0,0,0,10));
+
+        serverPortTextField.setMaximumSize(new Dimension(400,20));
+
+        pseudonymLabel.setPreferredSize(new Dimension(120,20));
+        pseudonymLabel.setBorder(new EmptyBorder(0,0,0,10));
+
+        pseudonymTextField.setMaximumSize(new Dimension(400,20));
+
+        connexionStateLabel.setPreferredSize(new Dimension(120,20));
+        connexionStateLabel.setBorder(new EmptyBorder(0,0,0,10));
+
+        connexionStateMsgLabel.setMinimumSize(new Dimension(400,20));
+
+        serverConnectBtn.setPreferredSize(new Dimension(40,20));
+        serverDisconnectBtn.setPreferredSize(new Dimension(40,20));
+
+        serverIpPanel.setPreferredSize(new Dimension(600,40));
+        serverIpPanel.setLayout(new BoxLayout(serverIpPanel, BoxLayout.X_AXIS));
+
+        serverPortPanel.setPreferredSize(new Dimension(600,40));
+        serverPortPanel.setLayout(new BoxLayout(serverPortPanel, BoxLayout.X_AXIS));
+
+        serverPseudonymPanel.setPreferredSize(new Dimension(600,40));
+        serverPseudonymPanel.setLayout(new BoxLayout(serverPseudonymPanel, BoxLayout.X_AXIS));
+
+        serverStatePanel.setPreferredSize(new Dimension(600,40));
+        serverStatePanel.setLayout(new BoxLayout(serverStatePanel, BoxLayout.X_AXIS));
+
+        serverButtonPanel.setPreferredSize(new Dimension(600,40));
+        serverButtonPanel.setLayout(new BoxLayout(serverButtonPanel, BoxLayout.X_AXIS));
+
+        serverPanel.setPreferredSize(new Dimension(600,190));
+        serverPortLabel.setBorder(new EmptyBorder(10,10,10,10));
+        serverPanel.setLayout(new BoxLayout(serverPanel, BoxLayout.Y_AXIS));
+
+        chatRoomLabel.setBorder(new EmptyBorder(0,0,0,10));
+        chatRoomLabel.setPreferredSize(new Dimension(120,20));
+
+        listScrollPane.setMinimumSize(new Dimension(400,100));
+        listScrollPane.setBorder(new EmptyBorder(10,10,10,10));
+
+        chatRoomJoinBtn.setMinimumSize(new Dimension(40,20));
+
+        chatRoomLeaveBtn.setMinimumSize(new Dimension(40,20));
+
+        chatRoomNameTextField.setMaximumSize(new Dimension(360,20));
+
+        chatRoomCreateBtn.setMinimumSize(new Dimension(40,20));
+
+        chatRoomNamePanel.setLayout(new BoxLayout(chatRoomNamePanel, BoxLayout.Y_AXIS));
+
+        chatRoomButtonPanel.setPreferredSize(new Dimension(600,40));
+        chatRoomButtonPanel.setBorder(new EmptyBorder(10,10,10,10));
+        chatRoomButtonPanel.setLayout(new BoxLayout(chatRoomButtonPanel, BoxLayout.X_AXIS));
+
+        chatRoomPanel.setPreferredSize(new Dimension(600,160));
+        chatRoomPanel.setLayout(new BoxLayout(chatRoomPanel, BoxLayout.Y_AXIS));
+
+        messageLabel.setPreferredSize(new Dimension(120,20));
+        messageLabel.setBorder(new EmptyBorder(0,0,0,10));
+
+        messageTextArea.setMinimumSize(new Dimension(400,100));
+
+        msgSendBtn.setPreferredSize(new Dimension(600,260));
+
+        messageTypingPanel.setPreferredSize(new Dimension(600,100));
+        messageTypingPanel.setBorder(new EmptyBorder(10,10,10,10));
+        messageTypingPanel.setLayout(new BoxLayout(messageTypingPanel, BoxLayout.Y_AXIS));
+
+        messageButtonPanel.setPreferredSize(new Dimension(600,40));
+        messageButtonPanel.setLayout(new BoxLayout(messageButtonPanel, BoxLayout.X_AXIS));
+
+        messagePanel.setPreferredSize(new Dimension(600,260));
+        messagePanel.setLayout(new BoxLayout(messagePanel, BoxLayout.Y_AXIS));
+
+        messageScrollPane.setPreferredSize(new Dimension(400,620));
+
+        chatTextArea.setBorder(new EmptyBorder(0,10,0,10));
+
+        chatPanel.setPreferredSize(new Dimension(400,620));
+        chatPanel.setLayout(new BoxLayout(chatPanel, BoxLayout.Y_AXIS));
+
+        interactionPanel.setPreferredSize(new Dimension(600,620));
+        interactionPanel.setLayout(new BoxLayout(interactionPanel, BoxLayout.Y_AXIS));
+
         //Add Panels in the window
-        this.getContentPane().add(chatPanel);
-        this.getContentPane().add(interactionPanel);
+        getContentPane().add(chatPanel);
+        getContentPane().add(interactionPanel);
 
         //Window initialisation
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setResizable(true);
-        this.setVisible(true);
-        this.getContentPane().setLayout(new BoxLayout(this.getContentPane(), BoxLayout.X_AXIS));
-        this.pack();
-        this.setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setResizable(true);
+        setVisible(true);
+        getContentPane().setLayout(new BoxLayout(this.getContentPane(), BoxLayout.X_AXIS));
+        pack();
+        setLocationRelativeTo(null);
 
     }
 
