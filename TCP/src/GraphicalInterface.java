@@ -300,14 +300,16 @@ public class GraphicalInterface extends JFrame implements ListSelectionListener 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(true);
         this.setVisible(true);
-        this.setLocationRelativeTo(null);
         this.getContentPane().setLayout(new BoxLayout(this.getContentPane(), BoxLayout.X_AXIS));
         this.pack();
+        this.setLocationRelativeTo(null);
 
     }
 
     public void addChatRoom(String chatRoom){
         chatRoomListModel.addElement(chatRoom);
+        chatRoomList.setSelectedIndex(chatRoomListModel.getSize()-1);
+        chatRoomList.ensureIndexIsVisible(chatRoomListModel.getSize()-1);
     }
 
     public void publishConnexionState(String msg) {
@@ -320,16 +322,6 @@ public class GraphicalInterface extends JFrame implements ListSelectionListener 
 
     //This method is required by ListSelectionListener.
     public void valueChanged(ListSelectionEvent e) {
-        if (!e.getValueIsAdjusting()) {
-
-            if (chatRoomList.getSelectedIndex() == -1) {
-                //No selection, disable fire button.
-
-            } else {
-                //Selection, enable the fire button.
-                //fireButton.setEnabled(true);
-            }
-        }
     }
 
     public void setButtons(boolean serverConnect, boolean serverDisconnect, boolean chatRoomCreate, boolean chatRoomJoin, boolean chatRoomLeave, boolean sendMsg){
