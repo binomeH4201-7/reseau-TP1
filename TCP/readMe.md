@@ -1,5 +1,5 @@
 # TP1 : Chat server
-##Introduction
+## Introduction
 Ce projet est constitué d'un serveur de chat et de modules clients indépendants avec interface graphique.<br/><br/>
 Ce projet est fourni avec un Makefile qui permet de compiler et exécuter le projet en ligne de commande. Il est également possible de réaliser ces actions via un IDE. Les principales commandes sont :
   * `all : génère les éxécutables`
