@@ -80,7 +80,8 @@ extends Thread {
         }
       }
     } catch (Exception e) {
-      System.err.println("Error in EchoServer:" + e); 
+      System.err.println("Error in ClientThread:");
+      e.printStackTrace();
       EchoServerMultiThreaded.removeConnectedThread(this);
     }
   }
