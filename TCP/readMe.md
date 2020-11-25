@@ -1,5 +1,5 @@
 # TP1 : Chat server
-##Introduction
+## Introduction
 Ce projet est constitué d'un serveur de chat et de modules clients indépendants avec interface graphique.<br/><br/>
 Ce projet est fourni avec un Makefile qui permet de compiler et exécuter le projet en ligne de commande. Il est également possible de réaliser ces actions via un IDE. Les principales commandes sont :
   * `all : génère les éxécutables`
@@ -14,6 +14,8 @@ La commande `make` permet de compiler le projet en ligne de commande.
 
 ## II/Lancer le serveur
 La commande `make start-server` permet de lancer le serveur. Par défaut, le port est le port 5100. Il est possible de préciser un port avec la commande :
+
+`make start-server port=<numero-port>`
 
 ## III/Lancer un client
 La commande `make start-client` permet de lancer un client. Une interface graphique permet de se connecter au serveur et d'envoyer des messages.
