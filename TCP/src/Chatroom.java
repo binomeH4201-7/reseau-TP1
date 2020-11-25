@@ -3,6 +3,13 @@ import java.util.LinkedList;
 import java.util.ArrayList;
 import java.io.*;
 
+/**
+ * Class representing a ChatRoom.
+ * Keeps tracks of which client are connected to the chatroom,
+ * writes down and load the history
+ *
+ * @author BUONOMO Phanie, BATEL Arthur
+ */
 public class Chatroom {
 
   private List<ClientThread> connectedClientsList;

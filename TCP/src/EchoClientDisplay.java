@@ -8,7 +8,12 @@
 import java.io.*;
 import java.net.*;
 
-
+/**
+ * Class representing a thread for a client.
+ * Reads the message sent by the client
+ *
+ * @author BUONOMO Phanie, BATEL Arthur
+ */
 public class EchoClientDisplay extends Thread {
 
   BufferedReader socIn = null;
@@ -20,8 +25,8 @@ public class EchoClientDisplay extends Thread {
     EchoClientDisplay(Socket echoSocket) {
 
         try {
-	           socIn = new BufferedReader(
-	    		           new InputStreamReader(echoSocket.getInputStream()));    
+               socIn = new BufferedReader(
+                           new InputStreamReader(echoSocket.getInputStream()));    
         } catch (UnknownHostException e) {
             System.err.println("Don't know about host");
             System.exit(1);

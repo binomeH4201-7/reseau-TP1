@@ -6,7 +6,12 @@ import javax.swing.text.DefaultCaret;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+/**
+ * Graphical Interface.
+ * Constructs the graphical interface for the client side and prints the messages received from the Server.
+ *
+ * @author BUONOMO Phanie, BATEL Arthur
+ */
 public class GraphicalInterface extends JFrame implements ListSelectionListener {
 
     EchoClient echoClient;

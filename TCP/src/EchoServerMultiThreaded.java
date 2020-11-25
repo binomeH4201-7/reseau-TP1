@@ -12,13 +12,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.io.File;
 
-public class EchoServerMultiThreaded  {
+/**
+ * Class representing a Server.
+ * Accepts several connections requests, manages the chatrooms and the list
+ * of connected Clients.
+ *
+ * @author BUONOMO Phanie, BATEL Arthur
+ */
 
-  /**
-   * main method
-   * @param EchoServerMultiThreaded port
-   * 
-   **/
+public class EchoServerMultiThreaded  {
 
   private static List<ClientThread> connectedThreadList = new ArrayList<>();
   private static List<Chatroom> chatroomList = new ArrayList<>();

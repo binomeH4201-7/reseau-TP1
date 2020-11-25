@@ -10,7 +10,13 @@ import java.net.*;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalTime;
 
-
+/**
+ * Class representing a Client.
+ * Connects itself to the server, 
+* does the actions for the client (join, leave, create a room, send a message, ...).
+ *
+ * @author BUONOMO Phanie, BATEL Arthur
+ */
 public class EchoClient {
 
   private Socket echoSocket;
@@ -22,7 +28,7 @@ public class EchoClient {
 
   /**
    *  main method
-   *  accepts a connection, receives a message from client then sends an echo to the client
+   *  
    **/
 
   public void connectToServer(String ip, int port, String pseudo){
@@ -103,6 +109,12 @@ public class EchoClient {
     ihm = g;
   }
 
+/**
+ * Class representing a ClientThread.
+ * Allows to send and display message at the same time for each client
+ *
+ * @author BUONOMO Phanie, BATEL Arthur
+ */
   public class ThreadDisplay extends Thread{
     GraphicalInterface ihm;
     boolean running;

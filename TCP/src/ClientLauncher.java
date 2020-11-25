@@ -1,5 +1,9 @@
 import java.io.IOException;
-
+/**
+ * Start the graphical interface and create a client
+ *
+ * @author BUONOMO Phanie, BATEL Arthur
+ */
 public class ClientLauncher {
 
     public static void main(String[] args) throws IOException {

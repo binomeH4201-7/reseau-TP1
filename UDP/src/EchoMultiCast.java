@@ -11,13 +11,19 @@ import java.net.*;
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * Class representing a Client Multicast
+ * Starts the connections and send the messages.
+ *
+ * @author BUONOMO Phanie, BATEL Arthur
+ */
 public class EchoMultiCast  {
   
- 	/**
-  	* main method
-	* @param EchoServer port
-  	* 
-  	**/
+    /**
+    * main method
+    * @param EchoServer port
+    * 
+    **/
 
     public static void main(String args[]){ 
 

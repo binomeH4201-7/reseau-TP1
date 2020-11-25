@@ -8,7 +8,12 @@
 import java.io.*;
 import java.net.*;
 
-
+/**
+ * Class representing a ClientMulticast Thread
+ * Allows to write and receive message at the same time
+ *
+ * @author BUONOMO Phanie, BATEL Arthur
+ */
 public class EchoMultiCastDisplay extends Thread {
 
  

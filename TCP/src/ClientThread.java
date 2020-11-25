@@ -9,7 +9,13 @@
 import java.io.*;
 import java.net.*;
 import java.io.InputStream;
-
+/**
+ * Class representing a Client Thread, serverSide.
+ * Allows to have several clients connected at the same time 
+ * Handle the request from the client
+ *
+ * @author BUONOMO Phanie, BATEL Arthur
+ */
 public class ClientThread
 extends Thread {
 
@@ -96,19 +102,19 @@ extends Thread {
 
   private void create(String msg, String chatroom){
               if(EchoServerMultiThreaded.createChatroom(chatroom)){
-              	currentChat = EchoServerMultiThreaded.joinChatroom(this,chatroom);
-              	EchoServerMultiThreaded.publishMessage(msg+ "has created the chatroom "+chatroom,currentChat);
-              	} else {
-              		this.join(msg,chatroom);
-          		}
+                currentChat = EchoServerMultiThreaded.joinChatroom(this,chatroom);
+                EchoServerMultiThreaded.publishMessage(msg+ "has created the chatroom "+chatroom,currentChat);
+                } else {
+                    this.join(msg,chatroom);
+                }
   }
 
   private void join(String msg, String chatroom){
               currentChat = EchoServerMultiThreaded.joinChatroom(this,chatroom);
               if(currentChat == null)
-              	this.create(msg,chatroom);
+                this.create(msg,chatroom);
               else
-              	EchoServerMultiThreaded.publishMessage(msg+"has joined the room.",currentChat);
+                EchoServerMultiThreaded.publishMessage(msg+"has joined the room.",currentChat);
   }
   
   private void leave(String msg){
