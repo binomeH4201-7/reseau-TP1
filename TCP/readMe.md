@@ -15,6 +15,8 @@ La commande `make` permet de compiler le projet en ligne de commande.
 ## II/Lancer le serveur
 La commande `make start-server` permet de lancer le serveur. Par défaut, le port est le port 5100. Il est possible de préciser un port avec la commande :
 
+`make start-server port=<numero-port>`
+
 ## III/Lancer un client
 La commande `make start-client` permet de lancer un client. Une interface graphique permet de se connecter au serveur et d'envoyer des messages.
 ## IV/Interface graphique
